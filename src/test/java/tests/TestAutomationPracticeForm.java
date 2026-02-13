@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-
 public class TestAutomationPracticeForm  extends TestBase{
     @Test
     void AllFieldsFilledInTest() {
