@@ -39,9 +39,6 @@ public class TestAutomationPracticeForm  extends TestBase{
         //Checking the completed form
         $(".modal-header").shouldHave(text("Thanks for submitting the form"));
 
-        //Checking the completed form
-        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
-
         SelenideElement table = $(".table-responsive");
         table.$(byText("Student Name")).parent().shouldHave(text("Alex D"));
         table.$(byText("Student Email")).parent().shouldHave(text("1@ya.com"));
