@@ -28,7 +28,7 @@ public class TestAutomationPracticeForm  extends TestBase{
         $(".react-datepicker__day.react-datepicker__day--007").click();
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#uploadPicture").uploadFile(new File("src/test/resources/176061-yablochnyj_pejzazh-yabloko-illustracia-prirodnyj_landshaft-purpur-500x.jpg"));
+        $("#uploadPicture").uploadFromClasspath("176061-yablochnyj_pejzazh-yabloko-illustracia-prirodnyj_landshaft-purpur-500x.jpg");
         $("#currentAddress").setValue("Baker Street, 221B");
         $("#state").scrollIntoView(true).click();
         $("#state").$(byText("Rajasthan")).click();
