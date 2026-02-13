@@ -3,7 +3,7 @@ package tests;
 
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
-import tests.TestBase;
+
 import java.io.File;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TestAutomationPracticeForm  extends TestBase{
     @Test
-    void AllFieldsFilledIn() {
+    void AllFieldsFilledInTest() {
         //Filling out the form
         open("/automation-practice-form");
         $("#firstName").setValue("Alex");
@@ -55,7 +55,7 @@ public class TestAutomationPracticeForm  extends TestBase{
         table.$(byText("State and City")).parent().shouldHave(text("Rajasthan Jaiselmer"));
         }
     @Test
-    void RequiredFieldsOnly() {
+    void RequiredFieldsOnlyTest() {
         //Filling out the form
         open("/automation-practice-form");
         $("#firstName").setValue("Alex");
