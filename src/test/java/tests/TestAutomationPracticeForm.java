@@ -4,7 +4,6 @@ package tests;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -14,7 +13,7 @@ public class TestAutomationPracticeForm  extends TestBase{
     void allFieldsFilledInTest() {
         //Filling out the form
         open("");
-        $$(".card-body").findBy(text("Forms")).click();
+        $$(".card-body").findBy(text("Forms")).scrollIntoView(true).click();
         $$(".router-link").findBy(text("Practice Form")).click();
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("D");
@@ -32,7 +31,7 @@ public class TestAutomationPracticeForm  extends TestBase{
         $("#uploadPicture").uploadFromClasspath("176061-yablochnyj_pejzazh-yabloko-illustracia-prirodnyj_landshaft-purpur-500x.jpg");
         $("#currentAddress").setValue("Baker Street, 221B");
         $("#state").scrollIntoView(true).click();
-        $("#state").$(byText("Rajasthan")).click();
+        $("#state").$(byText("Rajasthan")).scrollIntoView(true).click();
         $("#city").click();
         $("#city").$(byText("Jaiselmer")).click();
         $("#submit").click();
@@ -52,12 +51,15 @@ public class TestAutomationPracticeForm  extends TestBase{
         table.$(byText("Address")).parent().shouldHave(text("Baker Street, 221B"));
         table.$(byText("State and City")).parent().shouldHave(text("Rajasthan Jaiselmer"));
         }
+
     @Test
     void requiredFieldsOnlyTest() {
         //Filling out the form
         open("");
-        $$(".card-body").findBy(text("Forms")).click();
+        $$(".card-body").findBy(text("Forms")).scrollIntoView(true).click();
         $$(".router-link").findBy(text("Practice Form")).click();
+        $("#firstName").setValue("Alex");
+        $("#lastName").setValue("D");
         $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("1234567890");
         $("#submit").scrollTo().click();
