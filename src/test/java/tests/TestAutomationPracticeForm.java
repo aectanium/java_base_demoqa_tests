@@ -13,7 +13,9 @@ public class TestAutomationPracticeForm  extends TestBase{
     @Test
     void allFieldsFilledInTest() {
         //Filling out the form
-        open("/automation-practice-form");
+        open("");
+        $$(".card-body").findBy(text("Forms")).click();
+        $$(".router-link").findBy(text("Practice Form")).click();
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("D");
         $("#userEmail").setValue("1@ya.com");
@@ -53,9 +55,9 @@ public class TestAutomationPracticeForm  extends TestBase{
     @Test
     void requiredFieldsOnlyTest() {
         //Filling out the form
-        open("/automation-practice-form");
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("D");
+        open("");
+        $$(".card-body").findBy(text("Forms")).click();
+        $$(".router-link").findBy(text("Practice Form")).click();
         $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("1234567890");
         $("#submit").scrollTo().click();
