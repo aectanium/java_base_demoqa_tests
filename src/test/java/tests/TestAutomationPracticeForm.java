@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TestAutomationPracticeForm  extends TestBase{
     @Test
-    void AllFieldsFilledInTest() {
+    void allFieldsFilledInTest() {
         //Filling out the form
         open("/automation-practice-form");
         $("#firstName").setValue("Alex");
@@ -51,7 +51,7 @@ public class TestAutomationPracticeForm  extends TestBase{
         table.$(byText("State and City")).parent().shouldHave(text("Rajasthan Jaiselmer"));
         }
     @Test
-    void RequiredFieldsOnlyTest() {
+    void requiredFieldsOnlyTest() {
         //Filling out the form
         open("/automation-practice-form");
         $("#firstName").setValue("Alex");
