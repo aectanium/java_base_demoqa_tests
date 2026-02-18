@@ -2,48 +2,15 @@ package tests;
 
 
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static testData.TestData.*;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestAutomationPracticeForm  extends TestBase{
-    private String firstName;
-    private String lastName;
-    private String userEmail;
-    private String genterWrapper;
-    private String userNumber;
-    private String subjectsInput;
-    private String hobbiesWrapper;
-    private String uploadPicture;
-    private String currentAddress;
-    private String state;
-    private String city;
-    private String birthYear;
-    private String birthMonth;
-    private String birthDay;
-    private String dateOfBirth;
-    @BeforeEach
-    public void setup() {
-        //userName = getRandomString(10);
-        firstName = "Alex";
-        lastName = "D";
-        userEmail = "1@ya.com";
-        genterWrapper = "Male";
-        userNumber = "1234567890";
-        subjectsInput = "Math";
-        hobbiesWrapper = "Reading";
-        uploadPicture = "176061-yablochnyj_pejzazh-yabloko-illustracia-prirodnyj_landshaft-purpur-500x.jpg";
-        currentAddress = "Baker Street, 221B";
-        state = "Rajasthan";
-        city = "Jaiselmer";
-        birthYear = "1987";
-        birthMonth = "4";
-        birthDay = "007";
-        dateOfBirth ="07 May,1987";
-    }
+
     @Test
     void allFieldsFilledInTest() {
         //Filling out the form
