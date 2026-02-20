@@ -1,78 +1,58 @@
 package tests;
 
 
-import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
-import static testData.TestData.*;
+import test.data.RegistrationPage;
+import static test.data.TestData.*;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+public class TestAutomationPracticeForm extends TestBase {
 
-public class TestAutomationPracticeForm  extends TestBase{
+    private RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void allFieldsFilledInTest() {
-        //Filling out the form
-        open("");
-        $$(".card-body").findBy(text("Forms")).scrollIntoView(true).click();
-        $$(".router-link").findBy(text("Practice Form")).click();
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        //sleep(10000);
-        $("#userEmail").setValue(userEmail);
-        $("#genterWrapper").$(byText(genterWrapper)).click();
-        $("#userNumber").setValue(userNumber);
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").click();
-        $("option[value='"+ birthYear + "']").click();
-        $(".react-datepicker__month-select").click();
-        $("option[value='"+ birthMonth +"']").click();
-        $(".react-datepicker__day.react-datepicker__day--"+ birthDay).click();
-        $("#subjectsInput").setValue(subjectsInput).pressEnter();
-        $("#hobbiesWrapper").$(byText(hobbiesWrapper)).click();
-        $("#uploadPicture").uploadFromClasspath(uploadPicture);
-        $("#currentAddress").setValue(currentAddress);
-        $("#state").scrollIntoView(true).click();
-        $("#state").$(byText(state)).scrollIntoView(true).click();
-        $("#city").click();
-        $("#city").$(byText(city)).click();
-        $("#submit").click();
-        //sleep(10000);
-        //Checking the completed form
-        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
+        registrationPage.openPage()
+                .setFirstName(FIRST_NAME)
+                .setLastName(LAST_NAME)
+                .setEmail(USER_EMAIL)
+                .setGender(GENDER)
+                .setNumber(USER_NUMBER)
+                .setBirthDate(BIRTH_YEAR, BIRTH_MONTH, BIRTH_DAY)
+                .setSubjects(SUBJECTS)
+                .setHobbies(HOBBIES)
+                .uploadPicture(UPLOAD_PICTURE)
+                .setCurrentAddress(CURRENT_ADDRESS)
+                .setState(STATE)
+                .setCity(CITY)
+                .clickSubmit();
 
-        SelenideElement table = $(".table-responsive");
-        table.$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
-        table.$(byText("Student Email")).parent().shouldHave(text(userEmail));
-        table.$(byText("Gender")).parent().shouldHave(text(genterWrapper));
-        table.$(byText("Mobile")).parent().shouldHave(text(userNumber));
-        table.$(byText("Date of Birth")).parent().shouldHave(text(dateOfBirth));
-        table.$(byText("Subjects")).parent().shouldHave(text(subjectsInput));
-        table.$(byText("Hobbies")).parent().shouldHave(text(hobbiesWrapper));
-        table.$(byText("Picture")).parent().shouldHave(text(uploadPicture));
-        table.$(byText("Address")).parent().shouldHave(text(currentAddress));
-        table.$(byText("State and City")).parent().shouldHave(text(state + " " + city));
-        }
+        registrationPage.checkSuccessModalAppears()
+                .getResultTable()
+                .checkStudentName(FIRST_NAME, LAST_NAME)
+                .checkStudentEmail(USER_EMAIL)
+                .checkGender(GENDER)
+                .checkMobile(USER_NUMBER)
+                .checkDateOfBirth(DATE_OF_BIRTH)
+                .checkSubjects(SUBJECTS)
+                .checkHobbies(HOBBIES)
+                .checkPicture(UPLOAD_PICTURE)
+                .checkAddress(CURRENT_ADDRESS)
+                .checkStateAndCity(STATE, CITY);
+    }
 
     @Test
     void requiredFieldsOnlyTest() {
-        //Filling out the form
-        open("");
-        $$(".card-body").findBy(text("Forms")).scrollIntoView(true).click();
-        $$(".router-link").findBy(text("Practice Form")).click();
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#genterWrapper").$(byText(genterWrapper)).click();
-        $("#userNumber").setValue(userNumber);
-        $("#submit").scrollTo().click();
-        //sleep(10000);
-        //Checking the completed form
-        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
-        SelenideElement table = $(".table-responsive");
-        table.$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
-        table.$(byText("Gender")).parent().shouldHave(text(genterWrapper));
-        table.$(byText("Mobile")).parent().shouldHave(text(userNumber));
-    }
-    }
+        registrationPage.openPage()
+                .setFirstName(FIRST_NAME)
+                .setLastName(LAST_NAME)
+                .setGender(GENDER)
+                .setNumber(USER_NUMBER)
+                .scrollToSubmitAndClick();
 
+        registrationPage.checkSuccessModalAppears()
+                .getResultTable()
+                .checkStudentName(FIRST_NAME, LAST_NAME)
+                .checkGender(GENDER)
+                .checkMobile(USER_NUMBER);
+    }
+}
