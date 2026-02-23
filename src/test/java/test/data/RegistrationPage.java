@@ -1,6 +1,8 @@
 package test.data;
 
 import com.codeborne.selenide.SelenideElement;
+import components.CalendarComponent;
+import components.ResultTableComponent;
 
 
 import static com.codeborne.selenide.Condition.text;
@@ -60,12 +62,6 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setBirthDate(String year, String month, String day) {
-        dateOfBirthInput.click();
-        calendar.setDate(year, month, day);
-        return this;
-    }
-
-    public RegistrationPage setBirthDate(int year, int month, int day) {
         dateOfBirthInput.click();
         calendar.setDate(year, month, day);
         return this;
