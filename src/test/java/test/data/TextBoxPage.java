@@ -55,7 +55,7 @@ public class TextBoxPage {
         return this;
     }
 
-    // Исправленные методы с использованием цепочки вызовов
+
     public TextBoxPage fillAllFields(String userName, String userEmail, String currentAddress, String permanentAddress) {
         return setUserName(userName)
                 .setUserEmail(userEmail)
