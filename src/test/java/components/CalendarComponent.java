@@ -29,9 +29,8 @@ public class CalendarComponent {
         $(".react-datepicker__day.react-datepicker__day--" + day).click();
     }
 
-    public void setDate(int year, int month, int day) {
-        String monthValue = String.valueOf(month - 1);
-        String dayValue = String.format("%03d", day);
-        setDate(String.valueOf(year), monthValue, dayValue);
+//    public void setDate(int year, int month, int day) {
+//        String monthValue = String.valueOf(month - 1);
+//        String dayValue = String.format("%03d", day);
+//        setDate(String.valueOf(year), monthValue, dayValue);
     }
-}
