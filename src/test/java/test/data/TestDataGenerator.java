@@ -43,7 +43,7 @@ public class TestDataGenerator {
 
             LocalDate birthDate = generateRandomBirthDate();
             this.birthYear = String.valueOf(birthDate.getYear());
-            this.birthMonth = String.valueOf(birthDate.getMonthValue() - 1); // 0-based для календаря
+            this.birthMonth = String.valueOf(birthDate.getMonthValue() - 1);
             this.birthDay = String.format("%03d", birthDate.getDayOfMonth());
             this.dateOfBirth = birthDate.format(DateTimeFormatter.ofPattern("dd MMMM,yyyy", Locale.ENGLISH));
         }
@@ -55,7 +55,7 @@ public class TestDataGenerator {
     }
 
     private static String generatePhoneNumber() {
-        // Генерируем номер телефона из 10 цифр
+
         StringBuilder phoneNumber = new StringBuilder();
         for (int i = 0; i < 10; i++) {
             phoneNumber.append(random.nextInt(10));
@@ -102,7 +102,7 @@ public class TestDataGenerator {
     }
 
     private static LocalDate generateRandomBirthDate() {
-        // Генерация даты рождения 18-65 лет
+
         int minAge = 18;
         int maxAge = 65;
         LocalDate now = LocalDate.now();
