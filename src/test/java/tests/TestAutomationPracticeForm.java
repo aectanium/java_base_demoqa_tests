@@ -1,9 +1,9 @@
 package tests;
 
-
 import org.junit.jupiter.api.Test;
 import test.data.RegistrationPage;
-import static test.data.TestData.*;
+import test.data.TestDataGenerator;
+
 
 public class TestAutomationPracticeForm extends TestBase {
 
@@ -11,48 +11,52 @@ public class TestAutomationPracticeForm extends TestBase {
 
     @Test
     void allFieldsFilledInTest() {
+        TestDataGenerator.StudentData student = new TestDataGenerator.StudentData();
+
         registrationPage.openPage()
-                .setFirstName(FIRST_NAME)
-                .setLastName(LAST_NAME)
-                .setEmail(USER_EMAIL)
-                .setGender(GENDER)
-                .setNumber(USER_NUMBER)
-                .setBirthDate(BIRTH_YEAR, BIRTH_MONTH, BIRTH_DAY)
-                .setSubjects(SUBJECTS)
-                .setHobbies(HOBBIES)
-                .uploadPicture(UPLOAD_PICTURE)
-                .setCurrentAddress(CURRENT_ADDRESS)
-                .setState(STATE)
-                .setCity(CITY)
+                .setFirstName(student.firstName)
+                .setLastName(student.lastName)
+                .setEmail(student.email)
+                .setGender(student.gender)
+                .setNumber(student.phoneNumber)
+                .setBirthDate(student.birthYear, student.birthMonth, student.birthDay)
+                .setSubjects(student.subjects)
+                .setHobbies(student.hobbies)
+                .uploadPicture(student.uploadPicture)
+                .setCurrentAddress(student.currentAddress)
+                .setState(student.state)
+                .setCity(student.city)
                 .clickSubmit();
 
         registrationPage.checkSuccessModalAppears()
                 .getResultTable()
-                .checkStudentName(FIRST_NAME, LAST_NAME)
-                .checkStudentEmail(USER_EMAIL)
-                .checkGender(GENDER)
-                .checkMobile(USER_NUMBER)
-                .checkDateOfBirth(DATE_OF_BIRTH)
-                .checkSubjects(SUBJECTS)
-                .checkHobbies(HOBBIES)
-                .checkPicture(UPLOAD_PICTURE)
-                .checkAddress(CURRENT_ADDRESS)
-                .checkStateAndCity(STATE, CITY);
+                .checkStudentName(student.firstName, student.lastName)
+                .checkStudentEmail(student.email)
+                .checkGender(student.gender)
+                .checkMobile(student.phoneNumber)
+                .checkDateOfBirth(student.dateOfBirth)
+                .checkSubjects(student.subjects)
+                .checkHobbies(student.hobbies)
+                .checkPicture(student.uploadPicture)
+                .checkAddress(student.currentAddress)
+                .checkStateAndCity(student.state, student.city);
     }
 
     @Test
     void requiredFieldsOnlyTest() {
+        TestDataGenerator.StudentData student = new TestDataGenerator.StudentData();
+
         registrationPage.openPage()
-                .setFirstName(FIRST_NAME)
-                .setLastName(LAST_NAME)
-                .setGender(GENDER)
-                .setNumber(USER_NUMBER)
+                .setFirstName(student.firstName)
+                .setLastName(student.lastName)
+                .setGender(student.gender)
+                .setNumber(student.phoneNumber)
                 .scrollToSubmitAndClick();
 
         registrationPage.checkSuccessModalAppears()
                 .getResultTable()
-                .checkStudentName(FIRST_NAME, LAST_NAME)
-                .checkGender(GENDER)
-                .checkMobile(USER_NUMBER);
+                .checkStudentName(student.firstName, student.lastName)
+                .checkGender(student.gender)
+                .checkMobile(student.phoneNumber);
     }
 }
