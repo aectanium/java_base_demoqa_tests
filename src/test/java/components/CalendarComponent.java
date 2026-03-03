@@ -2,7 +2,11 @@ package components;
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class CalendarComponent {
 
@@ -16,21 +20,20 @@ public class CalendarComponent {
     }
 
     public void setYear(String year) {
-        yearSelect.click();
-        $("option[value='" + year + "']").click();
+        yearSelect.selectOptionByValue(year);
     }
 
     public void setMonth(String month) {
-        monthSelect.click();
-        $("option[value='" + month + "']").click();
+        monthSelect.selectOptionByValue(month);
     }
 
     public void setDay(String day) {
-        $(".react-datepicker__day.react-datepicker__day--" + day).click();
-    }
 
-//    public void setDate(int year, int month, int day) {
-//        String monthValue = String.valueOf(month - 1);
-//        String dayValue = String.format("%03d", day);
-//        setDate(String.valueOf(year), monthValue, dayValue);
+        int dayNumber = Integer.parseInt(day);
+        $$(".react-datepicker__day")
+                .filterBy(text(String.valueOf(dayNumber)))
+                .filterBy(not(cssClass("react-datepicker__day--outside-month")))
+                .first()
+                .click();
     }
+}

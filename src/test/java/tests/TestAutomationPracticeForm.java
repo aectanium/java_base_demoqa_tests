@@ -7,11 +7,12 @@ import test.data.TestDataGenerator;
 
 public class TestAutomationPracticeForm extends TestBase {
 
-    private RegistrationPage registrationPage = new RegistrationPage();
+    private final RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void allFieldsFilledInTest() {
-        TestDataGenerator.StudentData student = new TestDataGenerator.StudentData();
+        TestDataGenerator testDataGenerator = new TestDataGenerator();
+        TestDataGenerator.StudentData student = testDataGenerator.new StudentData();
 
         registrationPage.openPage()
                 .setFirstName(student.firstName)
@@ -44,7 +45,8 @@ public class TestAutomationPracticeForm extends TestBase {
 
     @Test
     void requiredFieldsOnlyTest() {
-        TestDataGenerator.StudentData student = new TestDataGenerator.StudentData();
+        TestDataGenerator testDataGenerator = new TestDataGenerator();
+        TestDataGenerator.StudentData student = testDataGenerator.new StudentData();
 
         registrationPage.openPage()
                 .setFirstName(student.firstName)

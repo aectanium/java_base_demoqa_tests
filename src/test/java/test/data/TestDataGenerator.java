@@ -4,14 +4,12 @@ import net.datafaker.Faker;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Random;
 
 public class TestDataGenerator {
 
-    private static final Faker faker = new Faker(new Locale("ru"));
-    private static final Random random = new Random();
+    private final Faker faker = new Faker(new Locale("en"));
 
-    public static class StudentData {
+    public class StudentData {
         public final String firstName;
         public final String lastName;
         public final String email;
@@ -33,7 +31,7 @@ public class TestDataGenerator {
             this.lastName = faker.name().lastName();
             this.email = faker.internet().emailAddress();
             this.gender = getRandomGender();
-            this.phoneNumber = generatePhoneNumber();
+            this.phoneNumber = faker.phoneNumber().subscriberNumber(10);
             this.subjects = getRandomSubject();
             this.hobbies = getRandomHobby();
             this.uploadPicture = "176061-yablochnyj_pejzazh-yabloko-illustracia-prirodnyj_landshaft-purpur-500x.jpg";
@@ -43,76 +41,66 @@ public class TestDataGenerator {
 
             LocalDate birthDate = generateRandomBirthDate();
             this.birthYear = String.valueOf(birthDate.getYear());
-            this.birthMonth = String.valueOf(birthDate.getMonthValue() - 1);
-            this.birthDay = String.format("%03d", birthDate.getDayOfMonth());
+            this.birthMonth = String.valueOf(birthDate.getMonthValue() - 1); // 0-based для календаря
+            this.birthDay = String.valueOf(birthDate.getDayOfMonth());
             this.dateOfBirth = birthDate.format(DateTimeFormatter.ofPattern("dd MMMM,yyyy", Locale.ENGLISH));
         }
     }
 
-    private static String getRandomGender() {
+    private String getRandomGender() {
         String[] genders = {"Male", "Female", "Other"};
-        return genders[random.nextInt(genders.length)];
+        return faker.options().option(genders);
     }
 
-    private static String generatePhoneNumber() {
-
-        StringBuilder phoneNumber = new StringBuilder();
-        for (int i = 0; i < 10; i++) {
-            phoneNumber.append(random.nextInt(10));
-        }
-        return phoneNumber.toString();
-    }
-
-    private static String getRandomSubject() {
+    private String getRandomSubject() {
         String[] subjects = {
                 "Math", "Physics", "Chemistry", "Biology", "Computer Science",
                 "Commerce", "Economics", "Arts", "Social Studies", "History",
                 "Civics", "Hindi", "English"
         };
-        return subjects[random.nextInt(subjects.length)];
+        return faker.options().option(subjects);
     }
 
-    private static String getRandomHobby() {
+    private String getRandomHobby() {
         String[] hobbies = {"Sports", "Reading", "Music"};
-        return hobbies[random.nextInt(hobbies.length)];
+        return faker.options().option(hobbies);
     }
 
-    private static String getRandomState() {
+    private String getRandomState() {
         String[] states = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
-        return states[random.nextInt(states.length)];
+        return faker.options().option(states);
     }
 
-    private static String getRandomCity(String state) {
+    private String getRandomCity(String state) {
         switch (state) {
             case "NCR":
                 String[] ncrCities = {"Delhi", "Gurgaon", "Noida"};
-                return ncrCities[random.nextInt(ncrCities.length)];
+                return faker.options().option(ncrCities);
             case "Uttar Pradesh":
                 String[] upCities = {"Agra", "Lucknow", "Merrut"};
-                return upCities[random.nextInt(upCities.length)];
+                return faker.options().option(upCities);
             case "Haryana":
                 String[] haryanaCities = {"Karnal", "Panipat"};
-                return haryanaCities[random.nextInt(haryanaCities.length)];
+                return faker.options().option(haryanaCities);
             case "Rajasthan":
                 String[] rajasthanCities = {"Jaipur", "Jaiselmer"};
-                return rajasthanCities[random.nextInt(rajasthanCities.length)];
+                return faker.options().option(rajasthanCities);
             default:
                 return "Delhi";
         }
     }
 
-    private static LocalDate generateRandomBirthDate() {
+    private LocalDate generateRandomBirthDate() {
 
-        int minAge = 18;
-        int maxAge = 65;
         LocalDate now = LocalDate.now();
-        LocalDate minDate = now.minusYears(maxAge);
-        LocalDate maxDate = now.minusYears(minAge);
+        LocalDate startDate = now.minusYears(65);  // 65 лет назад
+        LocalDate endDate = now.minusYears(18);    // 18 лет назад
 
-        long minDay = minDate.toEpochDay();
-        long maxDay = maxDate.toEpochDay();
-        long randomDay = minDay + random.nextInt((int) (maxDay - minDay));
 
-        return LocalDate.ofEpochDay(randomDay);
+        long startEpochDay = startDate.toEpochDay();
+        long endEpochDay = endDate.toEpochDay();
+        long randomEpochDay = faker.number().numberBetween(startEpochDay, endEpochDay);
+
+        return LocalDate.ofEpochDay(randomEpochDay);
     }
 }

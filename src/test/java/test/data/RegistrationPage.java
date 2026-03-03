@@ -117,4 +117,13 @@ public class RegistrationPage {
     public ResultTableComponent getResultTable() {
         return resultTable;
     }
+
+    public RegistrationPage sleep(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return this;
+    }
 }
