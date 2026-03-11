@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.EnumSource;
+import test.data.Gender;
 import test.data.RegistrationPage;
 import test.data.TestDataGenerator;
 
@@ -37,22 +38,7 @@ public class ParameterizedTests extends TestBase {
                 .scrollToSubmitAndClick()
                 .checkSuccessModalAppears()
                 .getResultTable().checkResult("Gender", gender);
-    }
 
-    enum Gender {
-        MALE("Male"),
-        FEMALE("Female"),
-        OTHER("Other");
-
-        private final String displayName;
-
-        Gender(String displayName) {
-            this.displayName = displayName;
-        }
-
-        public String getDisplayName() {
-            return displayName;
-        }
     }
 
     @ParameterizedTest
